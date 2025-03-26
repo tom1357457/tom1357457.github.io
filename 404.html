@@ -389,7 +389,7 @@
       var timezone = -(now.getTimezoneOffset() / 60);
       var timezoneStr = (timezone >= 0 ? '+' : '') + timezone;
       
-      document.getElementById('current-time').textContent = formatted;
+      document.getElementById('current-time').textContent = '当前时间（UTC' + timezoneStr + '）: ' + formatted;
     }
 
     document.addEventListener('DOMContentLoaded', function() {
