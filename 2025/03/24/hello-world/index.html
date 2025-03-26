@@ -706,12 +706,18 @@
   <script>
     function updateDateTime() {
       var now = new Date();
-      var formatted = now.getUTCFullYear() + '-' +
-                     String(now.getUTCMonth() + 1).padStart(2, '0') + '-' +
-                     String(now.getUTCDate()).padStart(2, '0') + ' ' +
-                     String(now.getUTCHours()).padStart(2, '0') + ':' +
-                     String(now.getUTCMinutes()).padStart(2, '0') + ':' +
-                     String(now.getUTCSeconds()).padStart(2, '0');
+      // 获取本地时间而不是 UTC 时间
+      var formatted = now.getFullYear() + '-' +
+                     String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                     String(now.getDate()).padStart(2, '0') + ' ' +
+                     String(now.getHours()).padStart(2, '0') + ':' +
+                     String(now.getMinutes()).padStart(2, '0') + ':' +
+                     String(now.getSeconds()).padStart(2, '0');
+      
+      // 添加时区信息
+      var timezone = -(now.getTimezoneOffset() / 60);
+      var timezoneStr = (timezone >= 0 ? '+' : '') + timezone;
+      
       document.getElementById('current-time').textContent = formatted;
     }
 
@@ -733,6 +739,10 @@
       font-family: monospace;
       font-size: 14px;
       line-height: 1.5;
+    }
+    #current-time {
+      color: #333;
+      font-weight: bold;
     }
   </style>
   <div id="current-time"></div>
